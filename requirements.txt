@@ -1,0 +1,8 @@
+pytest
+requests
+selenium
+docker
+pytest-html
+jsonschema
+pytest-xdist
+allure-pytest

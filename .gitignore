@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Virtualenv
+.venv/
+venv/
+
+# Pytest / Reports
+*.html
+*.xml
+allure-results/
+report.html
+
+# Docker
+*.log
+*.env

@@ -1,0 +1,8 @@
+services:
+  qachallenge:
+    image: farlahi00/qachallenge
+    container_name: qachallenge-api
+    ports:
+      - "80:80"
+    volumes:
+      - ./data/sql_app.db:/app/sql_app.db   # opcional (se quiseres persistência)
