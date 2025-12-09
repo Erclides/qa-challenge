@@ -6,11 +6,12 @@
       "type": "object",
       "properties": {
         "id": { "type": "integer" },
-        "name": { "type": "string" },
         "username": { "type": "string" },
-        "email": { "type": "string" }
+        "email": { "type": "string", "format": "email" },
+        "full_name": { "type": "string" },
+        "disabled": { "type": "boolean" }
       },
-      "required": ["id", "name", "username", "email"]
+      "required": ["id", "username", "email", "full_name", "disabled"]
     },
     {
       "type": "array",
@@ -18,11 +19,12 @@
         "type": "object",
         "properties": {
           "id": { "type": "integer" },
-          "name": { "type": "string" },
           "username": { "type": "string" },
-          "email": { "type": "string" }
+          "email": { "type": "string", "format": "email" },
+          "full_name": { "type": "string" },
+          "disabled": { "type": "boolean" }
         },
-        "required": ["id", "name", "username", "email"]
+        "required": ["id", "username", "email", "full_name", "disabled"]
       }
     }
   ]

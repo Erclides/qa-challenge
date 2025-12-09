@@ -12,14 +12,28 @@ class APIClient:
             self.authenticate(username, password)
 
     def authenticate(self, username: str, password: str):
-        """
-        Gera JWT via endpoint /token e guarda no header Authorization.
-        """
-        status, data = self.post("/token", {"username": username, "password": password}, include_token=False)
-        if status == 200 and "access_token" in data:
+        if not username or not password:
+            raise ValueError("Username e password devem ser fornecidos")
+
+        url = f"{self.base_url}/token"
+        response = requests.post(
+            url,
+            data={"username": username, "password": password},
+            headers={"Accept": "application/json"},
+            timeout=10
+        )
+
+        try:
+            data = response.json()
+        except ValueError:
+            data = None
+
+        if response.status_code == 200 and "access_token" in data:
             self.token = data["access_token"]
         else:
-            raise Exception(f"Falha ao autenticar: {status}, {data}")
+            raise Exception(f"Falha ao autenticar: {response.status_code}, {data}")
+
+
 
     def _request(self, method, endpoint, payload=None, include_token=True):
         """
@@ -50,6 +64,8 @@ class APIClient:
         except requests.exceptions.RequestException as e:
             return 500, {"error": str(e)}
 
+
+
     # ---------------- Métodos CRUD -----------------------
 
     def get(self, endpoint):
@@ -66,3 +82,4 @@ class APIClient:
 
     def delete(self, endpoint):
         return self._request("DELETE", endpoint)
+
